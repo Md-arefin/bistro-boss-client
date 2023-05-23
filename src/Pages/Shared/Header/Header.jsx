@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import logo from '../../../assets/logo.png'
 
 const Header = () => {
 
@@ -29,6 +29,7 @@ const Header = () => {
                     {navOptions}
                     </ul>
                 </div>
+                <img className="w-20 h-16 ml-10" src={logo} alt="" />
                 <a className="btn btn-ghost Cinzel text-2xl font-semibold">Bistro Boss</a>
             </div>
             <div className="navbar-center hidden lg:flex">
