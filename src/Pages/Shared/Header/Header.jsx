@@ -2,10 +2,14 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo.png'
 import { AuthContext } from "../../../provide/AuthProvider";
+import { BsCart4 } from 'react-icons/bs';
+import useCart from "../../../components/Hooks/usecart";
+
 
 const Header = () => {
 
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
 
     const handleLogOut = () => {
         logOut()
@@ -17,13 +21,14 @@ const Header = () => {
         <li><Link to='/' className="Cinzel ">Home</Link></li>
         <li><Link to='menu' className="Cinzel">Menu</Link></li>
         <li><Link to='order/salad' className="Cinzel">Order Food</Link></li>
+
         {
             user ? <>
                 <li ><span className="Cinzel">{user.displayName}</span></li>
                 <li className="flex items-center"><Link onClick={handleLogOut} className="Cinzel btn btn-ghost">log out</Link></li>
                 <li>
                     <div className="avatar">
-                        <div className="w-16 rounded-xl">
+                        <div className="w-16 rounded-full">
                             <img src={user.photoURL} />
                         </div>
                     </div>
@@ -32,6 +37,17 @@ const Header = () => {
 
                 <li><Link to='login' className="Cinzel btn btn-ghost">Login</Link></li>
         }
+
+        <li>
+            <Link to='/' className="Cinzel">
+                <div className="relative">
+                    <button className="btn btn-ghost gap-2">
+                        <BsCart4 className="text-4xl mt-5 mr-4"></BsCart4>
+                        <div className=" absolute top-0 mb-10 ml-2 badge bg-black text-white text-md px-2 py-3">+{cart?.length || 0}</div>
+                    </button>
+                </div>
+            </Link>
+        </li>
     </>
 
     return (

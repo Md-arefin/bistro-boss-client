@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../../provide/AuthProvider';
 
 const Login = () => {
@@ -28,6 +29,13 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'User Login successful',
+                showConfirmButton: false,
+                timer: 1500
+            })
             navigate(from, { replace: true});
         })
         .catch(Error=>{
